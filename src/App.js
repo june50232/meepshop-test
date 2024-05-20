@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Box } from "@mui/material";
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import Tools from "./components/Tools";
+import Content from "./components/Content"; // Import the Content component
+import "./App.css";
 
 function App() {
+  const [selectedElement, setSelectedElement] = useState(null);
+  const [elements, setElements] = useState([]);
+
+  const handleSelectElement = (element, index) => {
+    setSelectedElement(element ? { ...element, index } : null);
+  };
+
+  const handleUpdateElement = (updatedElement) => {
+    const newElements = [...elements];
+    newElements[selectedElement.index] = updatedElement;
+    setElements(newElements);
+    setSelectedElement(updatedElement);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DndProvider backend={HTML5Backend}>
+      <Box
+        className="App"
+        display="flex"
+        width="100%"
+        height="100vh"
+        overflow="auto"
+      >
+        <Tools selectedElement={selectedElement} onUpdateElement={handleUpdateElement} />
+        <Content onSelectElement={handleSelectElement} />
+      </Box>
+    </DndProvider>
   );
 }
 
 export default App;
+
