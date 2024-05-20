@@ -1,25 +1,18 @@
-import React, { useState } from "react";
-import { Box, TextField } from "@mui/material";
-import { useDrop } from "react-dnd";
+import React from 'react';
+import { Box } from '@mui/material';
+import { useDrop } from 'react-dnd';
 
 const ItemTypes = {
-  BUTTON: "button",
+  BUTTON: 'button',
 };
 
-function Content({ onSelectElement }) {
-  const [elements, setElements] = useState([]);
+function Content({ onSelectElement, elements, setElements }) {
   const [{ isOver }, drop] = useDrop(() => ({
     accept: ItemTypes.BUTTON,
     drop: (item) => {
-      const newElement =
-        item.label === "圖片元件"
-          ? {
-              type: "image",
-              url: "https://example.com/avatar.png",
-              width: "100px",
-              height: "100px",
-            }
-          : { type: "text", text: "I am the best candidate!" };
+      const newElement = item.label === '圖片元件'
+        ? { type: 'image', url: 'https://example.com/avatar.png', width: '100px', height: '100px' }
+        : { type: 'text', text: 'I am the best candidate!' };
       setElements((prevElements) => [...prevElements, newElement]);
     },
     collect: (monitor) => ({
@@ -28,14 +21,11 @@ function Content({ onSelectElement }) {
   }));
 
   const handleElementClick = (index, e) => {
-    e.stopPropagation(); // 阻止事件冒泡
+    e.stopPropagation(); // Prevent event bubbling
     onSelectElement(elements[index], index);
   };
 
   const handleContentClick = (e) => {
-    console.log({
-      "e.target": e.target.getAttribute("data-content-background"),
-    });
     onSelectElement(null);
   };
 
@@ -46,20 +36,15 @@ function Content({ onSelectElement }) {
       bgcolor="lightcoral"
       display="flex"
       flexDirection="column"
-      style={{ position: "relative", minHeight: "100vh" }}
+      style={{ position: 'relative', minHeight: '100vh' }}
       onClick={handleContentClick}
-      data-content-background="true" // 添加特定標記
+      data-content-background="true"
     >
-      <Box
-        component="header"
-        bgcolor="grey"
-        p={1}
-        style={{ position: "fixed", width: "80%", zIndex: 1000 }}
-      >
+      <Box component="header" bgcolor="grey" p={1} style={{ position: 'fixed', width: '80%', zIndex: 1000 }}>
         Fixed Header
       </Box>
-      <Box mt={3} pt={2} style={{ flex: 1, overflow: "auto" }}>
-        {isOver ? "Release to drop" : "Main Content"}
+      <Box mt={3} pt={2} style={{ flex: 1, overflow: 'auto' }}>
+        {isOver ? 'Release to drop' : 'Main Content'}
         <Box mt={2}>
           {elements.map((element, index) => (
             <Box
@@ -68,14 +53,10 @@ function Content({ onSelectElement }) {
               mb={1}
               border="1px solid black"
               onClick={(e) => handleElementClick(index, e)}
-              style={{ cursor: "pointer" }}
+              style={{ cursor: 'pointer' }}
             >
-              {element.type === "image" ? (
-                <img
-                  src={element.url}
-                  alt="avatar"
-                  style={{ width: element.width, height: element.height }}
-                />
+              {element.type === 'image' ? (
+                <img src={element.url} alt="avatar" style={{ width: element.width, height: element.height }} />
               ) : (
                 <p>{element.text}</p>
               )}

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Box } from "@mui/material";
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import Tools from "./components/Tools";
-import Content from "./components/Content"; // Import the Content component
+import Content from "./components/Content";
 import "./App.css";
 
 function App() {
@@ -30,12 +30,18 @@ function App() {
         height="100vh"
         overflow="auto"
       >
-        <Tools selectedElement={selectedElement} onUpdateElement={handleUpdateElement} />
-        <Content onSelectElement={handleSelectElement} />
+        <Tools
+          selectedElement={selectedElement}
+          onUpdateElement={handleUpdateElement}
+        />
+        <Content
+          onSelectElement={handleSelectElement}
+          elements={elements}
+          setElements={setElements}
+        />
       </Box>
     </DndProvider>
   );
 }
 
 export default App;
-
