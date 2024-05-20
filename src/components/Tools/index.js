@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { Box, Button, TextField } from '@mui/material';
-import { useDrag } from 'react-dnd';
+import React, { useState } from "react";
+import { Box, Button, TextField } from "@mui/material";
+import { useDrag } from "react-dnd";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const ItemTypes = {
-  BUTTON: 'button',
+  BUTTON: "button",
 };
 
 function DraggableButton({ label }) {
@@ -22,8 +24,8 @@ function DraggableButton({ label }) {
       fullWidth
       style={{
         opacity: isDragging ? 0.5 : 1,
-        cursor: 'move',
-        marginBottom: '8px',
+        cursor: "move",
+        marginBottom: "8px",
       }}
     >
       {label}
@@ -32,59 +34,53 @@ function DraggableButton({ label }) {
 }
 
 function Tools({ selectedElement, onUpdateElement }) {
-  const renderControls = () => {
-    if (selectedElement?.type === 'image') {
-      return (
-        <>
-          <TextField
-            label="Image URL"
-            fullWidth
-            margin="normal"
-            value={selectedElement.url}
-            onChange={(e) => onUpdateElement({ ...selectedElement, url: e.target.value })}
-          />
-          <TextField
-            label="Width"
-            fullWidth
-            margin="normal"
-            value={selectedElement.width}
-            onChange={(e) => onUpdateElement({ ...selectedElement, width: e.target.value })}
-          />
-          <TextField
-            label="Height"
-            fullWidth
-            margin="normal"
-            value={selectedElement.height}
-            onChange={(e) => onUpdateElement({ ...selectedElement, height: e.target.value })}
-          />
-        </>
-      );
-    } else if (selectedElement?.type === 'text') {
-      return (
-        <TextField
-          label="Text"
-          fullWidth
-          margin="normal"
+  return (
+    <Box bgcolor="lightblue" p={2}>
+      {selectedElement &&
+        selectedElement.type === "carousel" &&
+        selectedElement.images.map((img, index) => (
+          <Box key={index} p={2}>
+            Image {index + 1}
+            <TextField
+              label="URL"
+              value={img.url}
+              onChange={(e) =>
+                onUpdateElement({ ...img, url: e.target.value }, index)
+              }
+            />
+            <TextField
+              label="Width"
+              value={img.width}
+              onChange={(e) =>
+                onUpdateElement({ ...img, width: e.target.value }, index)
+              }
+            />
+            <TextField
+              label="Height"
+              value={img.height}
+              onChange={(e) =>
+                onUpdateElement({ ...img, height: e.target.value }, index)
+              }
+            />
+          </Box>
+        ))}
+      {selectedElement && selectedElement.type === "text" && (
+        <ReactQuill
+          theme="snow"
           value={selectedElement.text}
-          onChange={(e) => onUpdateElement({ ...selectedElement, text: e.target.value })}
+          onChange={(content) =>
+            onUpdateElement({ ...selectedElement, text: content })
+          }
         />
-      );
-    } else {
-      return (
+      )}
+      {!selectedElement && (
         <>
           <DraggableButton label="圖片元件" />
           <DraggableButton label="文字元件" />
         </>
-      );
-    }
-  };
-
-  return (
-    <Box width="20%" bgcolor="lightblue" p={2}>
-      {renderControls()}
+      )}
     </Box>
   );
 }
 
 export default Tools;
-

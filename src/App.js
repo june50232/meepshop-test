@@ -11,7 +11,10 @@ function App() {
   const [elements, setElements] = useState([]);
 
   const handleSelectElement = (element, index) => {
-    setSelectedElement(element ? { ...element, index } : null);
+    console.log({ element, index });
+    if (index !== undefined) {
+      setSelectedElement(element ? { ...element, index } : null);
+    }
   };
 
   const handleUpdateElement = (updatedElement) => {
@@ -30,15 +33,27 @@ function App() {
         height="100vh"
         overflow="auto"
       >
-        <Tools
-          selectedElement={selectedElement}
-          onUpdateElement={handleUpdateElement}
-        />
-        <Content
-          onSelectElement={handleSelectElement}
-          elements={elements}
-          setElements={setElements}
-        />
+        <Box width="20%" bgcolor="lightblue" p={2}>
+          <Tools
+            selectedElement={selectedElement}
+            onUpdateElement={handleUpdateElement}
+          />
+        </Box>
+        <Box width="80%">
+          <Box
+            component="header"
+            bgcolor="grey"
+            p={1}
+            style={{ position: "fixed", width: "80%", zIndex: 1000 }}
+          >
+            Fixed Header
+          </Box>
+          <Content
+            onSelectElement={handleSelectElement}
+            elements={elements}
+            setElements={setElements}
+          />
+        </Box>
       </Box>
     </DndProvider>
   );
