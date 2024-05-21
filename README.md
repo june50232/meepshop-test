@@ -11,12 +11,12 @@
 
 ## Demo
 
-- [Requirements 1 ~ 4](#requirements-1-~-4-Demo)
-- [加分題](#demo-for-加分題)
+- ### Demo URL: [https://meepshop-test-oh1xrlctl-june50232s-projects.vercel.app/](https://meepshop-test-oh1xrlctl-june50232s-projects.vercel.app/)
 
-## Requirements 1 ~ 4 Demo:
+  ![img](./public/requirement1.gif)
 
-![img](./public/requirement1.gif)
+- ### 加分題 Demo URL: [https://meepshop-test-c9dvt7e7b-june50232s-projects.vercel.app/](https://meepshop-test-c9dvt7e7b-june50232s-projects.vercel.app/)
+  ![img](./public/requirement2.gif)
 
 ## 1
 
@@ -127,10 +127,6 @@ onChange={(content) =>
 ```jsx
 onChange={(e) => onUpdateElement({ ...selectedElement, height: e.target.value })}
 ```
-
-## Demo for 加分題
-
-![img](./public/requirement2.gif)
 
 ## 5
 
