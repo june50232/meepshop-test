@@ -57,7 +57,7 @@ function Tools({ selectedElement, onUpdateElement }) {
   };
 
   return (
-    <>{console.log({selectedElement})}
+    <>
       {selectedElement &&
         selectedElement.type === "carousel" &&
         selectedElement.images.map((img, index) => (

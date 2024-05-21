@@ -13,7 +13,6 @@ function Content({ onSelectElement, elements, setElements }) {
   const [{ isOver }, drop] = useDrop(() => ({
     accept: ItemTypes.BUTTON,
     drop: (item) => {
-      console.log({ item });
       if (item.label === "圖片元件") {
         const newElement = {
           type: "carousel",
