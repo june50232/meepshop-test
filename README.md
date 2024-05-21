@@ -1,31 +1,26 @@
-# Create React App
+# Meepshop Demo
 
-This directory is a brief example of a [Create React App](https://github.com/facebook/create-react-app) site that can be deployed to Vercel with zero configuration.
+## Requirements
 
-## Deploy Your Own
+- [v] [1. 使用 React 實現 gif 功能 （僅需滿足畫面上所需的資料) ](#1)
+- [v] [2. 左側元件庫可以進行拖拉 (文字元件 , 圖片元件）](#2)
+- [v] [3. 右側預覽功能，預覽元件點擊時開啟左側的編輯功能，編輯對應的屬性可以即時看到更新後的預覽](https://github.com/meepshop/meepshop-demo/blob/main/src/App.js)
+- [v] 4. 可自行調整 UI
+- [v] 5. 加分題一 加上輪播元件
+- [v] 6. 加分題二 擴增任何你有想製作的 WYSIWYG 的元件，將文字編輯元件調整成 Rich Text Editor
 
-Deploy your own Create React App project with Vercel.
+## 1 
+> Requirement: 使用 React 實現以下 gif 功能 （僅需滿足畫面上所需的資料) 
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/create-react-app&template=create-react-app)
+![img](./public/requirement.gif)
 
-_Live Example: https://create-react-template.vercel.app/_
+> Demo:
 
-## Available Scripts
+- React v18
+- MUI v5
+- Using Create React App
+- Deploy to Vercel
+- `npm start`: run the app. Open [http://localhost:3000](http://localhost:3000) to view it in your browser
+- `npm test`: run the test
+- `npm run build`: build the app
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes. You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode. See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.
-
-It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes.
