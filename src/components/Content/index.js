@@ -20,28 +20,13 @@ function Content({ onSelectElement, elements, setElements }) {
           images: [
             {
               url: "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.2082370165.1716163200&semt=sph",
-              width: "100px",
-              height: "100px",
+              width: "300px",
+              height: "300px",
             },
             {
-              url: "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.2082370165.1716163200&semt=sph",
-              width: "100px",
-              height: "100px",
-            },
-            {
-              url: "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.2082370165.1716163200&semt=sph",
-              width: "100px",
-              height: "100px",
-            },
-            {
-              url: "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.2082370165.1716163200&semt=sph",
-              width: "100px",
-              height: "100px",
-            },
-            {
-              url: "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.2082370165.1716163200&semt=sph",
-              width: "100px",
-              height: "100px",
+              url: "https://img.freepik.com/free-psd/3d-illustration-person_23-2149436192.jpg?size=338&ext=jpg&ga=GA1.1.2082370165.1716163200&semt=sph",
+              width: "300px",
+              height: "300px",
             },
           ],
         };
@@ -59,29 +44,46 @@ function Content({ onSelectElement, elements, setElements }) {
     }),
   }));
 
+  const handleElementClick = (e, element, index) => {
+    e.stopPropagation();
+    onSelectElement(element, index);
+  };
+
   return (
     <Box
       ref={drop}
-      style={{ flex: 1, overflow: "auto", height: "100%" }}
+      p={6}
+      flex="1"
+      overflow="auto"
+      height="100%"
       onClick={() => onSelectElement(null)}
     >
+      {}
       {elements.map((element, index) =>
         element.type === "carousel" ? (
-          <Box key={index} onClick={() => onSelectElement(element, index)}>
-            <Slider autoplay autoplaySpeed={3000} speed={200}>
+          <Box
+            key={index}
+            onClick={(e) => handleElementClick(e, element, index)}
+          >
+            <Slider autoplay autoplaySpeed={1500} speed={200}>
               {element.images.map((img, idx) => (
                 <Box
                   key={idx}
                   component="img"
                   src={img.url}
-                  sx={{ width: img.width, height: img.height }}
+                  width={`${img.width} !important`}
+                  height={img.height}
+                  alt={`image-${idx}`}
                 />
               ))}
             </Slider>
           </Box>
         ) : element.type === "text" ? (
-          <Box key={index} onClick={() => onSelectElement(element, index)}>
-            {element.text}
+          <Box
+            key={index}
+            onClick={(e) => handleElementClick(e, element, index)}
+          >
+            <div dangerouslySetInnerHTML={{ __html: element.text }} />
           </Box>
         ) : null
       )}

@@ -11,10 +11,7 @@ function App() {
   const [elements, setElements] = useState([]);
 
   const handleSelectElement = (element, index) => {
-    console.log({ element, index });
-    if (index !== undefined) {
-      setSelectedElement(element ? { ...element, index } : null);
-    }
+    setSelectedElement(element ? { ...element, index } : null);
   };
 
   const handleUpdateElement = (updatedElement) => {
@@ -31,22 +28,32 @@ function App() {
         display="flex"
         width="100%"
         height="100vh"
-        overflow="auto"
+        overflow="hidden"
+        border="1px solid black"
       >
-        <Box width="20%" bgcolor="lightblue" p={2}>
+        <Box
+          width="20%"
+          border="1px solid black"
+          p={2}
+          overflow="auto"
+          height="100%"
+        >
           <Tools
             selectedElement={selectedElement}
             onUpdateElement={handleUpdateElement}
           />
         </Box>
-        <Box width="80%">
+        <Box width="80%" border="1px solid black" overflow="hidden">
           <Box
             component="header"
-            bgcolor="grey"
             p={1}
-            style={{ position: "fixed", width: "80%", zIndex: 1000 }}
+            border="1px solid black"
+            position="fixed"
+            width="80%"
+            fontWeight="bold"
+            textAlign="center"
           >
-            Fixed Header
+            This is a fixed Header, no need to modify
           </Box>
           <Content
             onSelectElement={handleSelectElement}

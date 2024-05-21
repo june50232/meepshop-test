@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Box, Button, TextField } from "@mui/material";
+import React from "react";
+import { Box, Button, TextField as MuiTextField } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import { useDrag } from "react-dnd";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -33,9 +34,30 @@ function DraggableButton({ label }) {
   );
 }
 
+const TextField = styled(MuiTextField)({
+  paddingBottom: "16px", // Set the padding bottom
+});
+
 function Tools({ selectedElement, onUpdateElement }) {
+  const handleUpdateImg = (e, item, index) => {
+    // Create a new copy of the images array
+    const updatedImages = [...selectedElement.images];
+
+    // Create a new copy of the target image and update it
+    const updatedImage = { ...updatedImages[index], [item]: e.target.value };
+
+    // Replace the old image object with the updated one
+    updatedImages[index] = updatedImage;
+
+    // Update the selectedElement object with the new images array
+    onUpdateElement({
+      ...selectedElement,
+      images: updatedImages,
+    });
+  };
+
   return (
-    <Box bgcolor="lightblue" p={2}>
+    <>{console.log({selectedElement})}
       {selectedElement &&
         selectedElement.type === "carousel" &&
         selectedElement.images.map((img, index) => (
@@ -44,23 +66,17 @@ function Tools({ selectedElement, onUpdateElement }) {
             <TextField
               label="URL"
               value={img.url}
-              onChange={(e) =>
-                onUpdateElement({ ...img, url: e.target.value }, index)
-              }
+              onChange={(e) => handleUpdateImg(e, "url", index)}
             />
             <TextField
               label="Width"
               value={img.width}
-              onChange={(e) =>
-                onUpdateElement({ ...img, width: e.target.value }, index)
-              }
+              onChange={(e) => handleUpdateImg(e, "width", index)}
             />
             <TextField
               label="Height"
               value={img.height}
-              onChange={(e) =>
-                onUpdateElement({ ...img, height: e.target.value }, index)
-              }
+              onChange={(e) => handleUpdateImg(e, "height", index)}
             />
           </Box>
         ))}
@@ -79,7 +95,7 @@ function Tools({ selectedElement, onUpdateElement }) {
           <DraggableButton label="文字元件" />
         </>
       )}
-    </Box>
+    </>
   );
 }
 
